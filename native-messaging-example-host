@@ -1,0 +1,179 @@
+#!/usr/bin/env python2.7
+#Setting up connection between API and python code
+
+import tweepy
+import datetime
+import json
+import time
+from tweepy import OAuthHandler
+from googleapiclient import discovery
+ 
+consumer_key = 'm7aUlAvyIJ7iJo4pSfCfL54lE'
+consumer_secret = 'R6Wv1Kwc0XBapup2RHkdrFE15H3y9USVTxXbX2aJcb2qeuOlcT'
+access_token = '915698586536615936-OsZYiwl8iY0dxwnhJeR4jKnSfS0bG0u'
+access_secret = 'refmc1RAYLwXmMCUb0rCtO73RPVSe1GJ5nncSY8nSuNKs'
+ 
+auth = OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+
+API_KEY='AIzaSyALZF0wisf4F2pYla8326buj9tdUz3rgJo'
+service = discovery.build('commentanalyzer', 'v1alpha1', developerKey=API_KEY)
+ 
+api = tweepy.API(auth)
+
+def analyze(user):
+    anonVal = 0
+    justCreated = datetime.datetime(2017, 9, 20, 0, 0)
+    ratio = user.friends_count/ user.followers_count
+    
+    if(user.default_profile_image):
+        anonVal += 1
+    
+    if(user.default_profile):
+        anonVal += 1
+    
+    if(user.created_at < justCreated):
+        anonVal += 1
+    
+    if(ratio > 5):
+        anonVal += 1
+        
+    if(user.contributors_enabled):
+        anonVal += 1
+    
+    if(user.favourites_count < 25):
+        anonVal += 1
+    
+    if(user.protected):
+        anonVal -= 1
+        
+    if(user.verified):
+        return("Not Anonymous")
+    
+    if(anonVal <= 1):
+        return("Not Anonymous")
+    elif(anonVal > 1 and anonVal < 4):
+        return("Could be Anonymous")
+    else:
+        return("Anonymous")
+
+def initialRun():
+    userList = []
+    userNames = []
+    results = []
+    toxic = []
+    inc = 0
+
+    for status in tweepy.Cursor(api.home_timeline).items(20):
+        user = api.get_user(status.user.id)
+        userNm = user.name
+        if inc < 1:
+            lastID = status.id_str
+            inc += 1
+        analyze_request = {
+          'comment': { 'text': status.text },
+          'requestedAttributes': {'TOXICITY': {}},
+          'languages' : ['en']
+        }
+        response = service.comments().analyze(body=analyze_request).execute()
+        temp = response['attributeScores']
+        temp2 = temp['TOXICITY']
+        temp3 = temp2['spanScores']
+        temp4 = temp3[0]
+        temp5 = temp4['score']
+        temp6 = temp5['value']
+        toxic.append(temp6)
+        userList.append(user)
+        userNames.append(userNm)
+    
+    for item in userList:
+        level = analyze(item)
+        results.append(level)
+
+#For giving the plugin the list of conclusions   
+    # return(json.dumps(results))
+    combine = list(zip(userNames, results, toxic))
+    return(json.dumps(combine))
+
+lastID = 0
+
+# Copyright (c) 2012 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# A simple native messaging host. Shows a Tkinter dialog with incoming messages
+# that also allows to send message back to the webapp.
+
+import struct
+import sys
+import threading
+import Queue
+from Tkinter import Tk, Entry, END
+try:
+  import Tkinter
+  import tkMessageBox
+except ImportError:
+  Tkinter = None
+
+# On Windows, the default I/O mode is O_TEXT. Set this to O_BINARY
+# to avoid unwanted modifications of the input/output streams.
+if sys.platform == "win32":
+  import os, msvcrt
+  msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)
+  msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
+
+# Helper function that sends a message to the webapp.
+def send_message(message):
+   # Write message size.
+  sys.stdout.write(struct.pack('I', len(message)))
+  # Write the message itself.
+  sys.stdout.write(message)
+  sys.stdout.flush()
+
+# Thread that reads messages from the webapp.
+def read_thread_func(queue):
+  message_number = 0
+  while 1:
+    # Read the message length (first 4 bytes).
+    text_length_bytes = sys.stdin.read(4)
+
+    if len(text_length_bytes) == 0:
+      if queue:
+        queue.put(None)
+      # sys.exit(0)
+
+    # Unpack message length as 4 byte integer.
+    text_length = struct.unpack('i', text_length_bytes)[0]
+
+    # Read the text (JSON object) of the message.
+    text = sys.stdin.read(text_length).decode('utf-8')
+
+    if queue:
+      queue.put(text)
+    else:
+      # In headless mode just send an echo message back.
+      send_message('{"echo": %s}' % text)
+
+if Tkinter:
+  class NativeMessagingWindow(Tkinter.Frame):
+    def __init__(self, queue):
+      self.queue = queue
+
+      Tkinter.Frame.__init__(self)
+      self.pack()
+
+
+def Main():
+
+  tempList = []
+  tempList = initialRun()
+
+  send_message(tempList)
+Main()
+
+
+
+
+
+
+
