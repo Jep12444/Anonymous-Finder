@@ -1,3 +1,5 @@
+// Project: Anonymous
+// Authors: Jonathan Peek, Daniel Im, Margaret Stump
 /* content.js */
 
 alert("You are on Twitter");sudo ln -s /usr/bin/nodejs /usr/bin/node

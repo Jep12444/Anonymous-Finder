@@ -1,3 +1,5 @@
+// Project: Anonymous
+// Authors: Jonathan Peek, Daniel Im, Margaret Stump
 /* background.js */
 
 // Called when the user clicks on the browser action.
