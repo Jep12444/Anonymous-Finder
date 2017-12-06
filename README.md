@@ -16,18 +16,17 @@ Using a Mac:
 
 	Once you have the Anonymous-Finder folder downloaded, you can place it anywhere easy to access.
 	
-	Open up Google Chrome and click the more options button in the top right (three dots vertically aligned).
+		Open up Google Chrome and click the more options button in the top right (three dots vertically aligned).
 	
-	Click on "More Tools" and click "Extensions"
+		Click on "More Tools" and click "Extensions"
 
-
-	Click on the "Load unpacked extension" button on the top left.
+		Click on the "Load unpacked extension" button on the top left.
 	
-	Navigate to where you placed the Anonymous-Finder folder and select it.
+		Navigate to where you placed the Anonymous-Finder folder and select it.
 	
-	Once you select it, you will be able to see your extension details as well as seeing the actual extension in the top right.
+		Once you select it, you will be able to see your extension details as well as seeing the actual extension in the top right.
 	
-	In the details, copy the extension ID because you will need it to set up your environment.
+		In the details, copy the extension ID because you will need it to set up your environment.
 
 
 	THE EXTENSION WILL NOT WORK UNTIL YOU FINISH SETTING UP YOUR ENVIRONMENT.
@@ -78,7 +77,7 @@ Using a Mac:
 
 	Go to the terminal and type in this command to open up your chrome browser...
 	
-	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --foo --bar=2
+		/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --foo --bar=2
 
 
 	Once the chrome browser is open, you should be able to see your chrome extension in the top right of the browser.
