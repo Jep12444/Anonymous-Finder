@@ -122,7 +122,6 @@ function onNativeMessage(message) {
   var tempList = str.split(']');
   var count = tempList.length - 2;
   var index = 0;
-  appendMessage("<b>Username(U) Anonimity(A)   Toxicity(T) </b>\n");
   var tempString;
   var resultList;
   while(count > 0)
@@ -133,15 +132,15 @@ function onNativeMessage(message) {
     resultList = tempString.split(',');
     if (count == tempList.length - 2)
     {
-      appendMessage("U: " + resultList[0]);
-      appendMessage("A: \n" + resultList[1]);
-      appendMessage("T: \n" + resultList[2]);
+      appendMessage("<b>Username:</b> " + resultList[0]);
+      appendMessage("<b>Anonymity:</b> \n" + resultList[1]);
+      appendMessage("<b>Toxicity:</b> \n" + resultList[2]);
     }
     else
     {
-      appendMessage("U: " + resultList[1]);
-      appendMessage("A: \n" + resultList[2]);
-      appendMessage("T: \n" + resultList[3]);
+      appendMessage("<b>Username:</b> " + resultList[1]);
+      appendMessage("<b>Anonymity:</b> \n" + resultList[2]);
+      appendMessage("<b>Toxicity:</b> \n" + resultList[3]);
 
     }
     appendMessage("----------------------------------------\n");
@@ -164,7 +163,8 @@ function onDisconnected() {
 */
 function analyze() {
   var hostName = "com.anonymous.anonymous_finder";
-  appendMessage("Connecting to <b>" + hostName + "</b>");
+  // appendMessage("Connecting to <b>" + hostName + "</b>");
+  appendMessage("Running");
 
   port = chrome.runtime.connectNative(hostName);
   port.onMessage.addListener(onNativeMessage);

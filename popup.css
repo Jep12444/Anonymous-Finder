@@ -1,0 +1,27 @@
+body{
+	text-align: center;
+	color: white;
+	margin: auto;
+	background-image: url("pixel.jpg");
+}
+
+h1{
+	font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
+	background-color: gray;
+	font-size: 25px;
+}
+#connect-button{
+	margin: auto;
+	background-color: black;
+    color: white;
+    padding: 5px 11px;
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+}
+#response{
+	margin: auto;
+	text-align: left;
+	background-color: gray;
+	padding: 2px 2px;
+}
