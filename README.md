@@ -67,7 +67,7 @@ Using a Mac:
 
 	Once you have the Native Messaging Host set up, your chrome extension should now run.
 	
-	*If you do not see a json-e file or any files at all create a json file named com.anonymous_finder.json with the contents:
+	*If you do not see a json-e dont worry about it but if you do not see a file or any files at all create a json file named com.anonymous_finder.json with the contents:
 	
 	```
 	{
