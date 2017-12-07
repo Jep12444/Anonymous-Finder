@@ -31,6 +31,9 @@ def analyze(user):
     if(user.default_profile_image):
         anonVal += 1
     
+    if " " not in user.name:
+    	anonVal += 1
+
     if(user.default_profile):
         anonVal += 1
     
@@ -43,7 +46,7 @@ def analyze(user):
     if(user.contributors_enabled):
         anonVal += 1
     
-    if(user.favourites_count < 25):
+    if(user.favourites_count < 100):
         anonVal += 1
     
     if(user.protected):
@@ -54,7 +57,7 @@ def analyze(user):
     
     if(anonVal <= 1):
         return("Not Anonymous")
-    elif(anonVal > 1 and anonVal < 4):
+    elif(anonVal > 1 and anonVal < 3):
         return("Could be Anonymous")
     else:
         return("Anonymous")
