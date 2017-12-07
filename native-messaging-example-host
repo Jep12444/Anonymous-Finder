@@ -1,6 +1,6 @@
+#!/usr/bin/env python2.7
 #Project: Anonymous
 #Authors: Jonathan Peek, Daniel Im, Margaret Stump
-#!/usr/bin/env python2.7
 #Setting up connection between API and python code
 
 import tweepy
@@ -84,7 +84,14 @@ def initialRun():
         temp4 = temp3[0]
         temp5 = temp4['score']
         temp6 = temp5['value']
-        toxic.append(temp6)
+        if (temp6 < .5):
+        	toxic.append('Not Toxic')
+        elif (temp6 >= .5 and temp6 < .75):
+        	toxic.append('Slightly Toxic')
+        elif (temp6 >= .75 and temp6 < .9):
+        	toxic.append('Toxic')
+        else:
+        	toxic.append('Very Toxic')
         userList.append(user)
         userNames.append(userNm)
     
