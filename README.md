@@ -1,5 +1,18 @@
 # Anonymous-Finder
 
+Created By: Jonathan Peek, Daniel Im, Margaret Stump
+
+Tools used to build:
+
+Tweepy
+
+Google Perspective API
+
+Google Native Messaging
+
+Chrome Extension
+
+# Setup
 Using a Mac:
 
 1) Grabbing our Code
