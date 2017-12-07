@@ -68,16 +68,18 @@ Using a Mac:
 	Once you have the Native Messaging Host set up, your chrome extension should now run.
 	
 	*If you do not see a json-e file or any files at all create a json file named com.anonymous_finder.json with the contents:
+	
+	```
 	{
   		"name": "com.anonymous.anonymous_finder",
-		  "description": "Group Project",
+		"description": "Group Project",
   		"path": "/File/Path/To/Location/of/native-messaging-example-host",
   		"type": "stdio",
   		"allowed_origins": [
-    		"chrome-extension://CHROMEEXTENSIONID/"
+    	"chrome-extension://CHROMEEXTENSIONID/"
   		]
 	}
-
+	```
 
 4) To run your extension
 
